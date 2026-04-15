@@ -1,0 +1,156 @@
+# LLM Teaching Package: Instructor Guide
+
+## Package Overview
+
+This package is organized as three notebooks:
+
+1. `notebooks/01_mini_transformer_from_scratch.ipynb`
+2. `notebooks/02_attention_encoder_decoder_seq2seq.ipynb`
+3. `notebooks/03_finetuning_and_applications_with_hf.ipynb`
+
+The sequence is designed to move from first principles to modern workflows:
+
+- Notebook 1 explains how a decoder-only transformer is built and trained from raw text.
+- Notebook 2 explains why attention matters in sequence-to-sequence models and fine-tunes T5 on SAMSum.
+- Notebook 3 fine-tunes a BERT-family classifier and demonstrates GPT-style dialogue generation plus summarization applications.
+
+## Student Assumptions
+
+These notebooks assume students:
+
+- are comfortable with Python and PyTorch
+- have already seen tensors, modules, losses, and optimization
+- need transformer-specific intuition, not a full derivation-heavy treatment
+
+## Environment Notes
+
+Each notebook includes an install cell that points to the repository bootstrap script.
+
+Recommended setup:
+
+1. Create one virtual environment for the entire teaching sequence.
+2. Run `scripts/setup_windows.ps1` from Windows PowerShell.
+3. Let the bootstrap script choose the correct PyTorch build for the current machine and register the Jupyter kernel.
+
+## Dataset Choices and Why They Were Selected
+
+- `karpathy/tiny_shakespeare`
+  Best for from-scratch training because it is small, fast, and visually interpretable.
+
+- `knkarthick/samsum`
+  Best for explaining seq2seq and summarization because conversations and summaries are easy to read in class.
+
+- `stanfordnlp/imdb`
+  Best for classification because the task is immediately intuitive and evaluation is easy to explain.
+
+- `li2017dailydialog/daily_dialog`
+  Best for chatbot-style formatting because the data already consists of short, turn-based conversations.
+
+## Suggested Delivery Flow
+
+### Notebook 1
+
+Recommended live focus:
+
+- tokenization from raw text
+- embeddings and positional information
+- attention math and causal masking
+- training loop and loss curves
+- attention visualization and generation
+
+Recommended pacing:
+
+- 20 to 30 minutes for explanation and inspection
+- 10 to 20 minutes for live training if you use the walkthrough preset
+
+If you are short on time:
+
+- keep `RUN_FULL_SIDE_PROJECT = False`
+- rely on the saved checkpoint path in `artifacts/checkpoints`
+
+### Notebook 2
+
+Recommended live focus:
+
+- why a fixed bottleneck is weak
+- how cross-attention solves that problem
+- encoder vs decoder vs cross-attention heatmaps
+- short T5 fine-tuning run on SAMSum
+
+Recommended pacing:
+
+- 20 to 25 minutes for the conceptual and visualization sections
+- 10 to 20 minutes for the fine-tuning section depending on hardware
+
+If you are short on time:
+
+- pre-run the T5 section once
+- load the checkpoint from `artifacts/checkpoints/t5_samsum_demo`
+
+### Notebook 3
+
+Recommended live focus:
+
+- BERT vs GPT attention patterns
+- DistilBERT fine-tuning on IMDb
+- probability interpretation for classification outputs
+- GPT-style response generation and summarization applications
+
+Recommended pacing:
+
+- 20 to 25 minutes for the BERT classification path
+- 10 to 15 minutes for applications
+- treat GPT fine-tuning as optional if time is tight
+
+If you are short on time:
+
+- leave `RUN_GPT_FINE_TUNING = False`
+- use the pretrained GPT checkpoint for generation
+
+## Checkpoint Strategy
+
+The notebooks are intentionally checkpoint-aware.
+
+Use this workflow before class:
+
+1. Run each notebook once on the instructor machine.
+2. Let the training sections save local checkpoints into `artifacts/checkpoints`.
+3. In class, keep checkpoint loading enabled.
+
+This gives you two teaching modes:
+
+- live training when the machine and schedule allow it
+- checkpoint loading when you want predictable pacing
+
+## What To Emphasize Verbally
+
+- An LLM is not magic. It is a next-token prediction system with a specific architecture and training objective.
+- Attention is a learned routing mechanism, not literal human attention.
+- Softmax is what turns arbitrary scores into a probability distribution.
+- Decoder-only models and encoder-decoder models solve related but different problems.
+- Fine-tuning is cheaper than training from scratch because pretrained weights already encode useful structure.
+
+## What Not To Overemphasize
+
+- full mathematical derivations of backpropagation
+- large-scale training engineering details like distributed sharding
+- benchmark chasing
+
+The notebooks are intentionally intuitive and visual first.
+
+## Optional Extensions
+
+If the class moves quickly, you can add:
+
+- a discussion of subword tokenization vs the character tokenizer used in Notebook 1
+- an exercise where students change temperature and top-k decoding
+- a comparison between the pretrained and fine-tuned outputs in Notebook 3
+- a small assignment asking students to pretrain longer and compare generation quality
+
+## File Generation
+
+The notebooks are generated by:
+
+- `scripts/generate_teaching_notebooks.py`
+
+If you want to revise notebook text or cells programmatically, update that generator and re-run it.

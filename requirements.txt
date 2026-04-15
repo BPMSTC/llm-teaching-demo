@@ -1,0 +1,17 @@
+# PyTorch is installed separately by scripts/bootstrap_env.py so the repo can
+# choose a CUDA-enabled build on NVIDIA Windows machines instead of defaulting
+# to a CPU-only wheel.
+datasets>=2.20
+transformers>=4.46
+evaluate>=0.4
+accelerate>=0.34
+sentencepiece
+rouge_score
+matplotlib
+seaborn
+pandas
+numpy
+scikit-learn
+jupyter
+ipywidgets
+tqdm
