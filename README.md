@@ -53,10 +53,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\setup_windows.ps1
 That script will:
 
 - create `llm-create-demo` if it does not already exist
-- detect whether `nvidia-smi` is available
-- install a CUDA-enabled PyTorch build on NVIDIA Windows machines
-- fall back to a CPU build if no NVIDIA GPU is detected
-- install the rest of the Python dependencies
+- install the CUDA-enabled PyTorch build and the rest of the Python dependencies from `requirements.txt`
 - register the Jupyter kernel
 
 If you prefer to run the steps manually:
@@ -107,7 +104,7 @@ Inside Jupyter, select the kernel named `Python (llm-create-demo)`.
 
 Notes:
 
-- `requirements.txt` no longer installs PyTorch directly. PyTorch is installed by `scripts/bootstrap_env.py` so the repo can choose a CUDA-enabled build when an NVIDIA GPU is present.
+- `requirements.txt` is configured to install the CUDA-enabled PyTorch wheel used by this Windows teaching environment.
 - Each notebook also contains an install cell so the environment setup is visible to students during class.
 
 ## Recommended Teaching Order
@@ -172,8 +169,8 @@ If you want to revise markdown, code cells, or notebook structure in one place, 
 ## Supporting Files
 
 - `INSTRUCTOR_GUIDE.md` contains pacing suggestions, dataset rationale, and checkpoint strategy.
-- `requirements.txt` contains the non-PyTorch Python dependencies for the teaching environment.
-- `scripts/bootstrap_env.py` chooses the correct PyTorch build for the current Windows machine.
+- `requirements.txt` contains the Python dependencies for the teaching environment, including the CUDA-enabled PyTorch wheel source.
+- `scripts/bootstrap_env.py` installs the shared requirements and prints the final PyTorch/CUDA status.
 - `scripts/setup_windows.ps1` creates the virtual environment, installs dependencies, and registers the Jupyter kernel.
 
 ## Datasets Used

@@ -30,7 +30,7 @@ Recommended setup:
 
 1. Create one virtual environment for the entire teaching sequence.
 2. Run `scripts/setup_windows.ps1` from Windows PowerShell.
-3. Let the bootstrap script choose the correct PyTorch build for the current machine and register the Jupyter kernel.
+3. Let the bootstrap script install the shared CUDA-enabled requirements and register the Jupyter kernel.
 
 ## Dataset Choices and Why They Were Selected
 

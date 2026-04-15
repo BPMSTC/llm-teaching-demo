@@ -56,8 +56,8 @@ COMMON_INSTALL_MARKDOWN = """
 # Environment Setup
 
 This notebook installs the shared environment for the whole teaching sequence.
-The repository bootstrap now handles PyTorch separately so NVIDIA Windows machines
-can use a CUDA-enabled wheel instead of silently falling back to a CPU-only build.
+The repository bootstrap installs from the shared `requirements.txt`, which is configured
+to pull the CUDA-enabled PyTorch wheel used for this Windows teaching environment.
 
 In the code cell below we:
 
