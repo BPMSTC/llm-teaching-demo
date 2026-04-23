@@ -20,7 +20,7 @@ Write-Host "Bootstrapping Python environment..."
 & $pythonExe (Join-Path $repoRoot "scripts\bootstrap_env.py")
 
 Write-Host "Registering Jupyter kernel..."
-& $pythonExe -m ipykernel install --user --name llm-create-demo --display-name "Python (llm-create-demo)"
+& $pythonExe -m ipykernel install --user --name LLM_demo --display-name "Python (LLM_demo)"
 
 Write-Host "Done. Start Jupyter with:"
 Write-Host "  llm-create-demo\Scripts\Activate.ps1"
